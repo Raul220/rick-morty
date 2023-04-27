@@ -1,31 +1,18 @@
-import React, { useEffect } from 'react'
-import logo from './logo.svg';
+
 import './App.css';
-import { listCharacters } from './services/RMServices';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from './pages/Home';
+import Character from './pages/Character';
 
 function App() {
 
-  useEffect(() => {
-    test()
-  }, [])
-
-  const test = () => {
-    listCharacters({page: 2})
-      .then(res => {
-        console.log(res)
-      })
-      .catch(e => {
-        console.log(e)
-      })
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/character/:Id" element={<Character />} />
+      </Routes>
+    </Router>
   );
 }
 

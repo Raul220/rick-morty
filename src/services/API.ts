@@ -1,4 +1,3 @@
-
 export type Character = {
     id: number,
     name: string,
@@ -20,4 +19,19 @@ export type URlItem = {
 
 export type IGetCharacterListVariables = {
     page: number
+}
+
+export type APIResponseData = {
+    data: {
+        data: {
+            characters: {
+                info: {
+                    count: number,
+                    pages: 42,
+                },
+                results : Character[],
+            }
+        }
+    },
+    status: number,
 }
