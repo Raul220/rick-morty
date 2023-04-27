@@ -1,22 +1,20 @@
 import { PropsWithChildren, createContext, useContext, useReducer } from "react";
-import RickMortyReducer, { UpdateCharacterListDataAction } from "./rmReducer";
-
-
-export interface characterData {
-    name: string;
-}
+import RickMortyReducer, { UpdateCharacterListDataAction, UpdateCharactersLengthDataAction } from "./rmReducer";
+import { Character } from "../services/API";
 
 export interface State {
-    characters: characterData[] | null,
+    characters: Character[] | null,
+    charactersLegth: number | null,
 }
 
 export interface Store {
     state: State,
-    dispatch?: React.Dispatch<UpdateCharacterListDataAction>;
+    dispatch?: React.Dispatch<UpdateCharacterListDataAction | UpdateCharactersLengthDataAction>;
 }
 
 const initialState: State = {
     characters: null,
+    charactersLegth: null,
 }
 
 const RickMortyContext = createContext<Store>({ state: initialState })
