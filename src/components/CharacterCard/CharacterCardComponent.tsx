@@ -10,7 +10,11 @@ interface ICharacterCard {
 const CharacterCardComponent: FC<ICharacterCard> = ({ name, image, id }) => {
 
     return (
-        <Card title={name} extra={<a href={`character/${id}`}>More</a>} style={{ width: 300 }}>
+        <Card
+            title={name}
+            extra={<a href={`character/${id}`}>More</a>}
+            style={{ width: 300, margin: '2.5px' }}
+        >
             <Image src={image} />
         </Card>
     )
