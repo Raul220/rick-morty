@@ -1,30 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
+import { listCharacters } from './services/RMServices';
 
 function App() {
 
-  useEffect (() => {
+  useEffect(() => {
     test()
   }, [])
 
   const test = () => {
-    
-    debugger;
-    axios.get('https://rickandmortyapi.com/api/character')
-    .then(res => {
-      console.log(res)
-    })
-    .catch(e => {
-      console.log(e)
-    })
+    listCharacters({page: 2})
+      .then(res => {
+        console.log(res)
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        
+
       </header>
     </div>
   );
