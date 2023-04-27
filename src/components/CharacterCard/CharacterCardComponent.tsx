@@ -15,7 +15,7 @@ const CharacterCardComponent: FC<ICharacterCard> = ({ name, image, id }) => {
             extra={<a href={`character/${id}`}>More</a>}
             style={{ width: 300, margin: '2.5px' }}
         >
-            <Image src={image} />
+            <Image src={image} style={{ borderRadius: '50%' }} />
         </Card>
     )
 

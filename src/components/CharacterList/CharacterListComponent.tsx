@@ -10,7 +10,7 @@ import './style.scss'
 
 const CharacterListComponent: FC = () => {
     const [currentPage, setCurrent] = useState(1);
-
+    const [loading, setLoading] = useState(false);
     const {
         state: {
             characters,
@@ -19,11 +19,10 @@ const CharacterListComponent: FC = () => {
         },
         dispatch
     } = useRickMortyContext();
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (!characters?.length) loadCharacters(1)
-    }, [characters])
+    }, [])
 
     /**
      * Call a service that returns the character list and the info of the character list
@@ -49,7 +48,7 @@ const CharacterListComponent: FC = () => {
             .catch(e => {
                 console.log(e)
             })
-            .finally(() => setLoading(false));
+        .finally(() => setLoading(false));
     }
 
     const nextPage = () => {
@@ -76,9 +75,9 @@ const CharacterListComponent: FC = () => {
 
     return (
         <div className="list-container">
-            <Space size='middle' direction="vertical">
-                {
-                    loading ? <Loader /> : (
+            {
+                loading ? <Loader /> : (
+                    <Space size='middle' direction="horizontal">
                         <Row justify='center'>
                             {
                                 characters?.map((item, index) => (
@@ -92,9 +91,9 @@ const CharacterListComponent: FC = () => {
                             }
 
                         </Row>
-                    )
-                }
-            </Space>
+                    </Space>
+                )
+            }
 
             <div className="footer">
                 <p>

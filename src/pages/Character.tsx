@@ -1,6 +1,4 @@
-const Character = () => {
-    return (
-        <p>Character page</p>
-    )
-}
-export default Character;
+import CharacterDetailComponent from "../components/CharacterDetail/CharacterDetailComponent";
+
+const Character = () => <CharacterDetailComponent />
+export default Character ;
