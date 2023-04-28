@@ -75,6 +75,7 @@ const CharacterListComponent: FC = () => {
 
     return (
         <div className="list-container">
+            <h1>Rick & Morty Characters</h1>
             {
                 loading ? <Loader /> : (
                     <Space size='middle' direction="horizontal">
@@ -86,6 +87,7 @@ const CharacterListComponent: FC = () => {
                                         id={item.id}
                                         image={item.image}
                                         name={item.name}
+                                        data-tastid={`card-item-${index}`}
                                     />
                                 ))
                             }
@@ -105,6 +107,7 @@ const CharacterListComponent: FC = () => {
                     size="middle"
                     shape="round"
                     disabled={currentPage === 1}
+                    data-testid='go-first-page-buttom'
                 />
                 <Button
                     icon={<LeftOutlined />}
@@ -112,8 +115,9 @@ const CharacterListComponent: FC = () => {
                     size="middle"
                     shape="round"
                     disabled={currentPage === 1}
+                    data-testid='go-previous-page-buttom'
                 />
-                <span className="current-page">
+                <span className="current-page" data-testid='current-page'>
                     {currentPage} / {pagesLength}
                 </span>
                 <Button
@@ -122,6 +126,7 @@ const CharacterListComponent: FC = () => {
                     size="middle"
                     shape="round"
                     disabled={currentPage === pagesLength}
+                    data-testid='go-next-page-buttom'
                 />
                 <Button
                     icon={<><RightOutlined /><RightOutlined /></>}
@@ -129,6 +134,7 @@ const CharacterListComponent: FC = () => {
                     size="middle"
                     shape="round"
                     disabled={currentPage === pagesLength}
+                    data-testid='go-last-page-buttom'
                 />
             </div>
         </div>
