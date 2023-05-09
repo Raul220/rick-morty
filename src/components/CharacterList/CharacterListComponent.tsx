@@ -7,75 +7,14 @@ import { listCharacters } from "../../services/RMServices";
 import CharacterCardComponent from "../CharacterCard/CharacterCardComponent";
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import './style.scss'
+import useGetCharacterList from "../../hooks/useGetCharacterList";
 
 const CharacterListComponent: FC = () => {
-    const [currentPage, setCurrent] = useState(1);
-    const [loading, setLoading] = useState(false);
-    const {
-        state: {
-            characters,
-            charactersLegth,
-            pagesLength,
-        },
-        dispatch
-    } = useRickMortyContext();
-
-    useEffect(() => {
-        if (!characters?.length) loadCharacters(1)
-    }, [])
-
-    /**
-     * Call a service that returns the character list and the info of the character list
-     * @param page page to paginate
-     */
-    const loadCharacters = (page: number) => {
-        setLoading(true)
-        listCharacters({ page: page })
-            .then((res) => {
-                if (res?.status === 200) {
-                    if (dispatch) {
-                        dispatch({
-                            type: 'UPDATE_STATE',
-                            payload: {
-                                characters: res.data.data.characters.results,
-                                charactersLegth: res.data.data.characters.info.count,
-                                pagesLength: res.data.data.characters.info.pages,
-                            }
-                        })
-                    }
-                }
-            })
-            .catch(e => {
-                console.log(e)
-            })
-        .finally(() => setLoading(false));
-    }
-
-    const nextPage = () => {
-        setCurrent(currentPage + 1);
-        loadCharacters(currentPage + 1);
-    }
-
-    const lastPage = () => {
-        if (pagesLength) {
-            setCurrent(pagesLength);
-            loadCharacters(pagesLength);
-        }
-    }
-
-    const previousPage = () => {
-        setCurrent(currentPage - 1);
-        loadCharacters(currentPage - 1);
-    }
-
-    const firstPage = () => {
-        setCurrent(1);
-        loadCharacters(1);
-    }
+    const { loading, characters, charactersLegth, pagesLength, currentPage, firstPage, lastPage, nextPage, previousPage } = useGetCharacterList()
 
     return (
         <div className="list-container">
-            <h1>Rick & Morty Characters</h1>
+            <h2>Rick & Morty Characters</h2>
             {
                 loading ? <Loader /> : (
                     <Space size='middle' direction="horizontal">
