@@ -28,7 +28,7 @@ describe('Pagination list', () => {
         expect(h1Element).toBeInTheDocument();
     })
 
-    it('Check if page the page indicator is in the document', async () => {
+    it('Check if the page indicator is in the document', async () => {
         render(<CharacterListComponent />);
         const pageIndicator = screen.getByTestId('current-page');
         expect(pageIndicator).toBeInTheDocument();
